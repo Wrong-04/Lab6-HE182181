@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App";
-import Exercises from "./Exercises4";
+
+import Bonus from "./Bonus";
+import Exercises4 from "./Exercises4";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <App />,
-  /* <Exercises /> */
+  <Bonus />,
+  // <Exercises4 />
 );
