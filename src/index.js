@@ -1,10 +1,11 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Bonus from "./Bonus";
-import Exercises4 from "./Exercises4";
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <Bonus />,
-  // <Exercises4 />
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
 );
