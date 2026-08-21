@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-import {
-  Container,
-  Form,
-  Button,
-  Alert,
-  Row,
-} from "react-bootstrap";
+import { Container, Form, Button, Alert, Row } from "react-bootstrap";
 
 const BASE_URL = "http://localhost:9999";
 
@@ -20,30 +14,25 @@ const LoginPage = () => {
   const handleLogin = (e) => {
     e.preventDefault();
     setError("");
-    try {
-      // Fetch accounts rồi find() trong JS
-      axios
-        .get(`${BASE_URL}/accounts`)
-        .then((res) => {
-          const user = res.data.find(
-            (s) =>
-              (s.email?.trim().toLowerCase() === emails.trim().toLowerCase()) &&
-              s.password === password
-          );
-          if (user) {
-            // [CHỨC NĂNG] Lưu toàn bộ object user vào localStorage dưới dạng JSON string
-            localStorage.setItem("user", JSON.stringify(user));
-            navigate("/syllabus");
-          } else {
-            setError("Invalid email or password");
-          }
-        })
-        .catch(() => {
-          setError("Error connecting to server");
-        });
-    } catch {
-      setError("Error connecting to server");
-    }
+    axios
+      .get(`${BASE_URL}/accounts`)
+      .then((res) => {
+        const user = res.data.find(
+          (s) =>
+            s.email?.trim().toLowerCase() === emails.trim().toLowerCase() &&
+            String(s.password).trim() === String(password).trim(),
+        );
+        if (user) {
+          localStorage.setItem("user", JSON.stringify(user));
+          navigate("/syllabus");
+        } else {
+          setError("Invalid email or password");
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+        setError("Error connecting to server.");
+      });
   };
 
   return (

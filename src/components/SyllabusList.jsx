@@ -46,43 +46,36 @@ const SyllabusList = () => {
 
   const filteredSubjects = useMemo(() => {
     return subjects.filter((s) => {
-      const matchCode =
-        !filter ||
-        filter === "All" ||
-        filter === "Code" ||
-        filter === "" ||
-        s.code === filter;
+      const matchCode = !filter || filter === "All" || s.code === filter;
       const matchKeyword =
         !search ||
         (s.name && s.name.toLowerCase().includes(search.toLowerCase())) ||
-        (s.code && s.code.toLowerCase().includes(search.toLowerCase())) ||
-        (s.description && s.description.toLowerCase().includes(search.toLowerCase()));
+        (s.code && s.code.toLowerCase().includes(search.toLowerCase()));
       return matchCode && matchKeyword;
     });
   }, [subjects, filter, search]);
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark" className="mb-4 px-3">
+      <Navbar
+        style={{ backgroundColor: "#ff9c0899" }}
+        variant="dark"
+        className="mb-4 px-3">
         <Navbar.Brand>FPT Education Learning Materials Portal</Navbar.Brand>
         <Nav className="ms-auto d-flex align-items-center">
           <h3 className="text-white me-3 mb-0 fs-5">
-            Hello, {user ? `${user.fullName} (${user.role})` : "Miss loan do (role)"}
+            Hello, {user ? `${user.fullName} (${user.role})` : ""}
           </h3>
-          {/* thêm hiển thị người dùng đang đăng nhập */}
           <Button variant="outline-light" size="sm" onClick={handleLogout}>
-            {/* nút log out chưa cần hoạt dộng cùng lắm thêm  cái link tra ve lại trang login  */}
             Logout
           </Button>
         </Nav>
       </Navbar>
       <Container>
-        {" "}
         <Row>
           <h1>Syllabus Management</h1>
           <Row>
             <Col md={1}>
-              {" "}
               <b>Search by:</b>
             </Col>
             <Col md={2}>
@@ -105,7 +98,6 @@ const SyllabusList = () => {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
-              {/* tìm bằng name */}
             </Col>
 
             <Col md={1}>
@@ -131,7 +123,9 @@ const SyllabusList = () => {
               {filteredSubjects.map((s, index) => (
                 <tr key={s.id || index}>
                   <td>
-                    <Link to={`/subject/${s.id}`} style={{ textDecoration: "none" }}>
+                    <Link
+                      to={`/subject/${s.id}`}
+                      style={{ textDecoration: "none" }}>
                       {s.code}
                     </Link>
                   </td>
